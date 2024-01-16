@@ -38,22 +38,30 @@ Make sure you have the following installed on your system:
    ```
 
 3. Install dependencies:
+   Following along the Rails documentation lead me to generate the error below:
+
    ```bash
-   bundle install
+   ERROR: While executing gem ... (Gem::FilePermissionError)
+   You dont have write permissions for the /Library/Ruby/Gems/2.6.0 directory
    ```
 
-4. Set up the database:
+   As I searched for a fix I read [this](https://www.moncefbelyamani.com/the-definitive-guide-to-installing-ruby-gems-on-a-mac/) blog post describing the problem & solution \
+   I decided to follow along with the ruby version manager setup the post recommended ([found here](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#read-this-part-only-if-you-are-on-an-apple-silicon-mac-m1m2))\
+
+   Now that ruby is running, I got back to the rails doc. [Getting started](https://guides.rubyonrails.org/getting_started.html)
+
+5. Set up the database:
    ```bash
    rails db:create
    rails db:migrate
    ```
 
-5. Start the server:
+6. Start the server:
    ```bash
    rails server
    ```
 
-6. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to access Artemis.
+7. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to access Artemis.
 
 ### TODO features
 
