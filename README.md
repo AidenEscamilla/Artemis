@@ -11,7 +11,7 @@ Artemis is a Ruby on Rails web application designed to help me track and manage 
 - **Job Listings:**
   - Add with the simple copy paste of the url
   - Edit, and delete job listings with details like company, position, and application status.
-  - Application status includes (status, phone_call?, made_the_interview?, made_second_round?)
+  - Application status includes: status, phone_call?, made_the_interview?, made_second_round?
 - **Important dates:** Keep track of important application deadlines and interviews all in one place.
 - **Resume Storage:** Upload and store your resumes for easy access during the application process.
 
@@ -57,6 +57,6 @@ Make sure you have the following installed on your system:
 
 ### TODO features
 
-1. Navigate to the "Job Listings" section to add your job applications.
+1. Create "Job Listings" section to add job description.
 2. Upload and manage your resumes in the "Resume Storage" section.
-3. Set up section for important deadlines.
+3. Set up section for important deadlines. Include tags such as: deadline, interview, phone_call.
