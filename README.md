@@ -58,10 +58,18 @@ Make sure you have the following installed on your system:
 
 6. Start the server:
    ```bash
-   rails server
+   bin/rails server
    ```
 
 7. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to access Artemis.
+
+### Findings
+
+1. The lazy programmer in me decided `bin/rails` was too much typing. However, when creating an alias `'rails server' = 'bin/rails server'` I ran into my first
+```bash
+/Users/{username}/.zshrc:5: bad assignment
+```
+A more seasoned programmer might have spotted the error already but you shouldn't include unneeded whitespace in scripts. Shoutout to [this article](https://itsfoss.com/solve-zsh-bad-assignment/) for a quick solution and lesson on whitespace in scripts & linux
 
 ### TODO features
 
