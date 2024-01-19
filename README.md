@@ -72,6 +72,7 @@ Makeing sure I have the following installed on my system:
   A more seasoned programmer might have spotted the error already but you shouldn't include unneeded whitespace in scripts. Shoutout to [this article](https://itsfoss.com/solve-zsh-bad-assignment/) for a quick solution and lesson on whitespace in scripts & linux
 
 2. Converted from sqlite to a more familiar & practicle Postgres following [this article](https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-macos) for the setup
+  - And the because i'm used to uuid's (and they seem more secure) I followed along [this video](https://www.youtube.com/watch?v=P6Kgn6wElPY) to setup uuid for the database & for any models generated. 
 
 ### TODO features
 
