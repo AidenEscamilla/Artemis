@@ -17,13 +17,13 @@ Artemis is a Ruby on Rails web application designed to help me track and manage 
 
 ## Getting Started
 
-### Prerequisites
+### Findings
 
-Make sure you have the following installed on your system:
+Makeing sure I have the following installed on my system:
 
 - Ruby
 - Rails
-- SQLite or your preferred database system
+- Postgres
 
 ### Installation
 
@@ -63,13 +63,15 @@ Make sure you have the following installed on your system:
 
 7. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to access Artemis.
 
-### Findings
+### Post rails getting-started
 
 1. The lazy programmer in me decided `bin/rails` was too much typing. However, when creating an alias `'rails server' = 'bin/rails server'` I ran into my first
-```bash
-/Users/{username}/.zshrc:5: bad assignment
-```
-A more seasoned programmer might have spotted the error already but you shouldn't include unneeded whitespace in scripts. Shoutout to [this article](https://itsfoss.com/solve-zsh-bad-assignment/) for a quick solution and lesson on whitespace in scripts & linux
+  ```bash
+  /Users/{username}/.zshrc:5: bad assignment
+  ```
+  A more seasoned programmer might have spotted the error already but you shouldn't include unneeded whitespace in scripts. Shoutout to [this article](https://itsfoss.com/solve-zsh-bad-assignment/) for a quick solution and lesson on whitespace in scripts & linux
+
+2. Converted from sqlite to a more familiar & practicle Postgres following [this article](https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-macos) for the setup
 
 ### TODO features
 
