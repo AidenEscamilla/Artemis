@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  root "employers#index"
-  resources :employers
-  #root "articles#index"
+  root 'home#index'
 
-  #resources :articles do
-    
+  resources :employers
+  resources :home, only: [:index]
   #end
 end
