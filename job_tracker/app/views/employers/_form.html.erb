@@ -27,8 +27,19 @@
   </div>
 
   <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
+    <%= form.fields :address, model: OpenStruct.new(employer.address) do |field| %>
+      <%= field.label :street, style: "display: block" %>
+      <%= field.text_field :street %> <br>
+
+      <%= field.label :city, style: "display: block" %>
+      <%= field.text_field :city %> <br>
+
+      <%= field.label :state, style: "display: block" %>
+      <%= field.text_field :state %> <br>
+
+      <%= field.label :zip, style: "display: block" %>
+      <%= field.text_field :zip %>
+    <% end %>
   </div>
 
   <div>
