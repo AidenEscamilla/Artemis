@@ -20,17 +20,13 @@ class EmployersController < ApplicationController
   end
 
   # POST /employers or /employers.json
-  def create
-    @employer = Employer.new(employer_params)
-
-    respond_to do |format|
-      if @employer.save
-        format.html { redirect_to employer_url(@employer), notice: "Employer was successfully created." }
-        format.json { render :show, status: :created, location: @employer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @employer.errors, status: :unprocessable_entity }
-      end
+  def create  
+    if current_form.call(params: employer_params)
+      redirect_to employers_path, notice: "Employer was successfully created."
+    else
+      #print errors to view page
+      render :new, status: :unprocessable_entity, alert: "Employer was not created.", locals: { employer: @employer}
+      render :new, status: :unprocessable_entity, alert: "Employer was not created."
     end
   end
 
@@ -61,6 +57,10 @@ class EmployersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_employer
       @employer = Employer.find(params[:id])
+    end
+
+    def current_form
+      @current_form ||= Employers::EmployerForm
     end
 
     # Only allow a list of trusted parameters through.
