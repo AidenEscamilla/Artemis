@@ -4,7 +4,20 @@
 
 <div id="employers">
   <% @employers.each do |employer| %>
-    <%= render employer %>
+
+    <div style="padding-top: 10px;">
+    <b>Name: </b><%= employer.name%>
+    </div>
+    <div style="padding-top: 10px;">
+      <b>Email: </b><%= employer.email%>
+    </div>
+    <div style="padding-top: 10px;">
+      <b>Phone Number: </b><%= format_phone_number(employer.phone_number)%>
+    </div>
+    <div style="padding-top: 10px;">
+      <b>Address: </b><%= format_address(employer.address)%>
+    </div>
+
     <p>
       <%= link_to "Show this employer", employer %>
     </p>

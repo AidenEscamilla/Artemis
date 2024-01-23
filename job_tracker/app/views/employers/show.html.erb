@@ -1,10 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @employer %>
+<div style="padding-top: 10px;">
+  <b>Name: </b><%= @employer.name%>
+</div>
 
-<div>
+<div style="padding-top: 10px;">
+  <b>Email: </b><%= @employer.email%>
+</div>
+
+<div style="padding-top: 10px;">
+  <b>Phone Number: </b><%= format_phone_number(@employer.phone_number)%>
+</div>
+
+<div style="padding-top: 10px;">
+  <b>Address: </b><%= format_address(@employer.address)%>
+</div>
+
+<div style="padding-top: 10px;">
   <%= link_to "Edit this employer", edit_employer_path(@employer) %> |
   <%= link_to "Back to employers", employers_path %>
+</div>
 
-  <%= button_to "Destroy this employer", @employer, method: :delete %>
+<div style="padding-top: 30px;">
+  <%= button_to "Destroy this employer",
+    @employer,
+    method: :delete,
+    form: {data: {turbo_confirm: 'Are you sure?'}}
+  %>
 </div>
