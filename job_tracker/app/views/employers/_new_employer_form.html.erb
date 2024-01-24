@@ -1,10 +1,8 @@
-<%= form_with(model: employer) do |form| %>
-  <% if employer.errors.any? %>
+<%= form_with(model: employer_form, url: employers_url) do |form| %>
+  <% if @employer_form.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(employer.errors.count, "error") %> prohibited this employer from being saved:</h2>
-
       <ul>
-        <% employer.errors.each do |error| %>
+        <% @employer_form.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -27,7 +25,7 @@
   </div>
 
   <div>
-    <%= form.fields :address, model: OpenStruct.new(employer.address) do |field| %>
+    <%= form.fields :address, model: OpenStruct.new(employer_form.address) do |field| %>
       <%= field.label :street, style: "display: block" %>
       <%= field.text_field :street %> <br>
 

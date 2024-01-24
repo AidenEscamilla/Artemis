@@ -12,7 +12,7 @@ class EmployersController < ApplicationController
 
   # GET /employers/new
   def new
-    @employer = Employer.new
+    @employer_form = Employers::EmployerForm.new
   end
 
   # GET /employers/1/edit
@@ -20,13 +20,14 @@ class EmployersController < ApplicationController
   end
 
   # POST /employers or /employers.json
-  def create  
-    if current_form.call(params: employer_params)
+  def create
+    @employer_form = Employers::EmployerForm.new(params: employer_form_params)
+
+    if @employer_form.call
       redirect_to employers_path, notice: "Employer was successfully created."
     else
-      #print errors to view page
-      render :new, status: :unprocessable_entity, alert: "Employer was not created.", locals: { employer: @employer}
-      render :new, status: :unprocessable_entity, alert: "Employer was not created."
+      flash[:error] = @employer_form.errors.full_messages
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -59,12 +60,12 @@ class EmployersController < ApplicationController
       @employer = Employer.find(params[:id])
     end
 
-    def current_form
-      @current_form ||= Employers::EmployerForm
-    end
-
     # Only allow a list of trusted parameters through.
     def employer_params
       params.require(:employer).permit(:name, :phone_number, :email, :address => [:street, :city, :state, :zip])
+    end
+
+    def employer_form_params
+      params.require(:employers_employer_form).permit(:name, :phone_number, :email, :address => [:street, :city, :state, :zip])
     end
 end

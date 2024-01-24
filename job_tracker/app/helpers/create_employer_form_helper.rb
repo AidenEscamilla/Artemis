@@ -2,6 +2,7 @@ module CreateEmployerFormHelper
   include ActionView::Helpers::NumberHelper
 
   def format_phone_number(phone_number)
+    phone_number = phone_number.gsub(/\D/, "")  # Remove all non-digits
     number_to_phone(phone_number, area_code: true, delimiter: "-")
   end
 
