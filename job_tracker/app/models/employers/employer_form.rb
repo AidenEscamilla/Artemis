@@ -21,9 +21,6 @@ class Employers::EmployerForm
     Employer.create!(name:, email:, phone_number:, address:)
   end
 
-  # def self.model_name
-  #   ActiveModel::Name.new(self, nil, 'EmployerForm')
-  # end
   private
 
   def phone_number_is_valid
@@ -38,7 +35,8 @@ class Employers::EmployerForm
     return unless address.present?
 
     valid_street
-    valid_city_and_state
+    valid_city
+    valid_state
     valid_zip
   end
 
@@ -53,18 +51,21 @@ class Employers::EmployerForm
     end
   end
 
-  def valid_city_and_state
+  def valid_city
     if address[:city].blank?
       errors.add(:city, 'can\'t be blank')
-      return
-    end
-    if address[:state].blank?
-      errors.add(:state, 'can\'t be blank')
       return
     end
 
     unless address[:city].match?(/\A[a-zA-Z\s]+\z/)
       errors.add(:city, 'is invalid format')
+    end
+  end
+
+  def valid_state
+    if address[:state].blank?
+      errors.add(:state, 'can\'t be blank')
+      return
     end
 
     unless address[:state].match?(/\A[a-zA-Z\s]+\z/)

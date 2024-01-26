@@ -3,7 +3,7 @@ class EmployersController < ApplicationController
 
   # GET /employers or /employers.json
   def index
-    @employers = Employer.all
+    @employers = Employer.all.order(:name)
   end
 
   # GET /employers/1 or /employers/1.json
@@ -17,6 +17,7 @@ class EmployersController < ApplicationController
 
   # GET /employers/1/edit
   def edit
+    @employer_form
   end
 
   # POST /employers or /employers.json
@@ -33,14 +34,14 @@ class EmployersController < ApplicationController
 
   # PATCH/PUT /employers/1 or /employers/1.json
   def update
-    respond_to do |format|
-      if @employer.update(employer_params)
-        format.html { redirect_to employer_url(@employer), notice: "Employer was successfully updated." }
-        format.json { render :show, status: :ok, location: @employer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @employer.errors, status: :unprocessable_entity }
-      end
+    # @employer = Employer.find(params[:id])
+    @employer_form = Employers::UpdateEmployerForm.new(employer_id: params[:id], params: employer_params)
+
+    if @employer_form.call
+      redirect_to employers_path, notice: "Employer was successfully created."
+    else
+      flash[:error] = @employer_form.errors.full_messages
+      render :edit, status: :unprocessable_entity
     end
   end
 
