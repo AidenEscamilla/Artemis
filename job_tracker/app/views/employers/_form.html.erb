@@ -1,0 +1,46 @@
+<%= form_with(model: employer) do |form| %>
+  <% if employer.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% employer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :phone_number, style: "display: block" %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.fields :address, model: OpenStruct.new(employer.address) do |field| %>
+      <%= field.label :street, style: "display: block" %>
+      <%= field.text_field :street %> <br>
+
+      <%= field.label :city, style: "display: block" %>
+      <%= field.text_field :city %> <br>
+
+      <%= field.label :state, style: "display: block" %>
+      <%= field.text_field :state %> <br>
+
+      <%= field.label :zip, style: "display: block" %>
+      <%= field.text_field :zip %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

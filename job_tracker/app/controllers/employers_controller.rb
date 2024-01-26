@@ -12,7 +12,7 @@ class EmployersController < ApplicationController
 
   # GET /employers/new
   def new
-    @employer_form = Employers::EmployerForm.new
+    @employer = Employer.new
   end
 
   # GET /employers/1/edit
@@ -22,25 +22,20 @@ class EmployersController < ApplicationController
 
   # POST /employers or /employers.json
   def create
-    @employer_form = Employers::EmployerForm.new(params: employer_form_params)
+    @employer = Employer.new(employer_params)
 
-    if @employer_form.call
+    if @employer.save
       redirect_to employers_path, notice: "Employer was successfully created."
     else
-      flash[:error] = @employer_form.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /employers/1 or /employers/1.json
-  def update
-    # @employer = Employer.find(params[:id])
-    @employer_form = Employers::UpdateEmployerForm.new(employer_id: params[:id], params: employer_params)
-
-    if @employer_form.call
+  def update    
+    if @employer.update(employer_params)
       redirect_to employers_path, notice: "Employer was successfully created."
     else
-      flash[:error] = @employer_form.errors.full_messages
       render :edit, status: :unprocessable_entity
     end
   end
@@ -56,7 +51,6 @@ class EmployersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_employer
       @employer = Employer.find(params[:id])
     end
@@ -64,9 +58,5 @@ class EmployersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def employer_params
       params.require(:employer).permit(:name, :phone_number, :email, :address => [:street, :city, :state, :zip])
-    end
-
-    def employer_form_params
-      params.require(:employers_employer_form).permit(:name, :phone_number, :email, :address => [:street, :city, :state, :zip])
     end
 end
