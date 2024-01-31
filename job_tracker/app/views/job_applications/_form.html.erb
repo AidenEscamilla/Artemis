@@ -10,18 +10,18 @@
   <% end %>
 
   <div>
+    <%= form.label :employer_id, style: "display: block" %>
+    <%= form.select :employer_id, Employer.all.map {|employer| [employer.name, employer.id]}, include_blank: true  %>
+  </div>
+
+  <div>
     <%= form.label :job_title, style: "display: block" %>
     <%= form.text_field :job_title %>
   </div>
 
   <div>
-    <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.select :status, JobApplication.statuses.map {|status, value| [status.humanize, value]}  %>
   </div>
 
   <div>
