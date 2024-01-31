@@ -7,7 +7,11 @@
 <h3 class=".container" style="padding-top: 10px;">
   <div class="row">
     <div class="col-3">
-      <b>Employer: </b><%= link_to "#{@job_application.employer.name}", employer_path(@job_application.employer)%>
+      <% employer = @job_application.employer %>
+
+      <%# TODO: Make employer info pop-out on this view,
+      OR learn how to make employer#Show have a back button%>
+      <b>Employer: </b><%= link_to "#{employer.name}", employer_path(employer)%>
     </div>
 
     <div class="col-2">
@@ -15,14 +19,6 @@
     </div>
   </div>
 </h3>
-
-<%
-=begin%>
- <h3 style="padding-top: 10px;">
-  <b>Status: </b><%= @job_application.status%>
-</h3> 
-<%
-=end%>
 
 <ul>
     <li> <%= "Job Description" %> </li>
