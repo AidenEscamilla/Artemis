@@ -4,14 +4,15 @@
   <b>Title: </b><%= @job_application.job_title%>
 </h1>
 
-<h3 class="container" style="padding-top: 10px;">
+<h3 class=".container" style="padding-top: 10px;">
+  <div class="row">
+    <div class="col-3">
+      <b>Employer: </b><%= link_to "#{@job_application.employer.name}", employer_path(@job_application.employer)%>
+    </div>
 
-  <div class="col-sm">
-    <b>Employer: </b><%= @job_application.employer.name%>
-  </div>
-
-  <div class="col-sm">
-    <b>Status: </b><%= @job_application.status%>
+    <div class="col-2">
+      <b>Status: </b><%= @job_application.status.humanize%>
+    </div>
   </div>
 </h3>
 
@@ -24,11 +25,10 @@
 =end%>
 
 <ul>
-    <li> <%= "Job Applications" %> </li>
+    <li> <%= "Job Description" %> </li>
     <li> <%= "Interviews" %> </li>
-    <li> <%= "Employers" %> </li>
     <li> <%= "Supporting Documents" %> </li>
-    <li> <%= "Job Offers" %> </li>
+    <li> <%= "Offer?" %> </li>
 </ul>
 
 <div style="padding-top: 10px;">
