@@ -1,1 +1,1 @@
-json.partial! "employers/employer", employer: @employer
+# json.partial! "employers/employer", employer: @employer
