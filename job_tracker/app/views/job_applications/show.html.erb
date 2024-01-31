@@ -1,16 +1,35 @@
 <p style="color: green"><%= notice %></p>
 
-<div style="padding-top: 10px;">
-  <b>Employer: </b><%= @job_application.employer.name%>
-</div>
-
-<div style="padding-top: 10px;">
+<h1 style="padding-top: 10px;">
   <b>Title: </b><%= @job_application.job_title%>
-</div>
+</h1>
 
-<div style="padding-top: 10px;">
+<h3 class="container" style="padding-top: 10px;">
+
+  <div class="col-sm">
+    <b>Employer: </b><%= @job_application.employer.name%>
+  </div>
+
+  <div class="col-sm">
+    <b>Status: </b><%= @job_application.status%>
+  </div>
+</h3>
+
+<%
+=begin%>
+ <h3 style="padding-top: 10px;">
   <b>Status: </b><%= @job_application.status%>
-</div>
+</h3> 
+<%
+=end%>
+
+<ul>
+    <li> <%= "Job Applications" %> </li>
+    <li> <%= "Interviews" %> </li>
+    <li> <%= "Employers" %> </li>
+    <li> <%= "Supporting Documents" %> </li>
+    <li> <%= "Job Offers" %> </li>
+</ul>
 
 <div style="padding-top: 10px;">
   <%= link_to "Edit this job application", edit_job_application_path(@job_application) %> |
