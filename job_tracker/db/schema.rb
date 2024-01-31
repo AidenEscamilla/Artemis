@@ -15,10 +15,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_224916) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  # Custom types defined in this database.
-  # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "status", ["applied", "rejected", "interview_scheduled", "second_round", "waiting_decision", "offered_job", "hired"]
-
   create_table "employers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "phone_number"
@@ -31,7 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_224916) do
   create_table "job_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "employer_id", null: false
     t.string "title"
-    t.enum "status", default: "applied", null: false, enum_type: "status"
+    t.string "status", default: "applied", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employer_id"], name: "index_job_applications_on_employer_id"
