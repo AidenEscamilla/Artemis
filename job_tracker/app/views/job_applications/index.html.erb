@@ -4,7 +4,17 @@
 
 <div id="job_applications">
   <% @job_applications.each do |job_application| %>
-    <%= render job_application %>
+    
+    <div style="padding-top: 10px;">
+    <b>Employer: </b><%= job_application.employer.name%>
+    </div>
+    <div style="padding-top: 10px;">
+      <b>Title: </b><%= job_application.job_title%>
+    </div>
+    <div style="padding-top: 10px;">
+      <b>Status: </b><%= job_application.status%>
+    </div>
+    
     <p>
       <%= link_to "Show this job application", job_application %>
     </p>
