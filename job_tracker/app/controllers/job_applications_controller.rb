@@ -13,6 +13,7 @@ class JobApplicationsController < ApplicationController
   # GET /job_applications/new
   def new
     @job_application = JobApplication.new
+    @job_application.build_job_description
   end
 
   # GET /job_applications/1/edit
@@ -57,6 +58,10 @@ class JobApplicationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def job_application_params
-      params.require(:job_application).permit(:id, :job_title, :employer_id, :status)
+      params
+        .require(:job_application)
+        .permit(:id, :job_title, :employer_id, :status,
+                job_description_attributes: %i[description requirements min_salary max_salary job_classification]
+        )
     end
 end

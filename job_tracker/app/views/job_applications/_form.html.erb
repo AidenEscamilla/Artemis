@@ -25,6 +25,37 @@
   </div>
 
   <div>
+    <%= form.fields_for :job_description, include_id: false do |description|%>
+      <div>
+        <%= description.label :description, style: "display: block" %>
+        <%= description.text_area :description %>
+      </div>
+
+      <div>
+        <%= description.label :requirements, style: "display: block" %>
+        <%= description.text_area :requirements %>
+      </div>
+
+      <div>
+        <%= description.label :job_classification, style: "display: block" %>
+        <%= description.text_field :job_classification %>
+      </div>
+
+      <div>
+        <%= description.label :min_salary, style: "display: block" %>
+        <%= description.number_field :min_salary %>
+      </div>
+
+      <div>
+        <%= description.label :max_salary, style: "display: block" %>
+        <%= description.number_field :max_salary %>
+      </div>
+
+
+    <% end %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
