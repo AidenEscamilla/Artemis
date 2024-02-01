@@ -1,4 +1,10 @@
 <div id="<%= dom_id job_description %>">
+
+  <h2>
+    <strong>Job application:</strong>
+    <%= link_to "#{job_description.job_application.job_title}", job_application_path(job_description.job_application) %>
+  </h2>
+
   <p>
     <strong>Description:</strong>
     <%= job_description.description %>
@@ -22,11 +28,6 @@
   <p>
     <strong>Max salary:</strong>
     <%= job_description.max_salary %>
-  </p>
-
-  <p>
-    <strong>Job application:</strong>
-    <%= job_description.job_application_id %>
   </p>
 
 </div>
