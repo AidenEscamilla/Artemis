@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_224916) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_01_000646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -33,5 +33,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_224916) do
     t.index ["employer_id"], name: "index_job_applications_on_employer_id"
   end
 
+  create_table "job_descriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "description"
+    t.text "requirements"
+    t.string "job_classification"
+    t.integer "min_salary"
+    t.integer "max_salary"
+    t.uuid "job_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_application_id"], name: "index_job_descriptions_on_job_application_id"
+  end
+
   add_foreign_key "job_applications", "employers"
+  add_foreign_key "job_descriptions", "job_applications"
 end

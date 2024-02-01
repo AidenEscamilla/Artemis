@@ -1,0 +1,50 @@
+<%= form_with(model: job_description) do |form| %>
+  <% if job_description.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(job_description.errors.count, "error") %> prohibited this job_description from being saved:</h2>
+
+      <ul>
+        <% job_description.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :requirements, style: "display: block" %>
+    <%= form.text_area :requirements %>
+  </div>
+
+  <div>
+    <%= form.label :job_classification, style: "display: block" %>
+    <%= form.text_field :job_classification %>
+  </div>
+
+  <div>
+    <%= form.label :min_salary, style: "display: block" %>
+    <%= form.number_field :min_salary %>
+  </div>
+
+  <div>
+    <%= form.label :max_salary, style: "display: block" %>
+    <%= form.number_field :max_salary %>
+  </div>
+
+  <div>
+    <%= form.label :job_application_id, style: "display: block" %>
+    <%= form.select :job_application_id,
+      JobApplication.all.map { |job_app| [ "#{job_app.employer.name}: #{job_app.job_title}", job_app.id ] },
+      include_blank: true
+    %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
