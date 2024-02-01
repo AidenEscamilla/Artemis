@@ -1,22 +1,39 @@
 <div id="<%= dom_id employer %>">
-  <p>
-    <strong>Name:</strong>
-    <%= employer.name %>
-  </p>
 
-  <p>
-    <strong>Phone number:</strong>
-    <%= employer.phone_number %>
-  </p>
+<h1 style="padding-top: 10px;">
+  <b>Name: </b><%= employer.name%>
+</h1>
 
-  <p>
-    <strong>Email:</strong>
-    <%= employer.email %>
-  </p>
+<div style="padding-top: 10px;">
+  <b>Email: </b><%= employer.email%>
+</div>
 
-  <p>
-    <strong>Address:</strong>
-    <%= employer.address %>
-  </p>
+<div style="padding-top: 10px;">
+  <b>Phone Number: </b><%= format_phone_number(employer.phone_number)%>
+</div>
 
+<div style="padding-top: 10px;">
+  <b>Address: </b><%= format_address(employer.address)%>
+</div>
+
+<div>
+  <% if employer.job_applications.any? %>
+    <h3>Job Applications</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Job Title</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% employer.job_applications.all.order(job_title: :asc).each do |job_application| %>
+          <tr>
+            <td><%= link_to "#{job_application.job_title}", job_application %></td>
+            <td><%= job_application.status %> <%#TODO: Add small button to quickly change status%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
