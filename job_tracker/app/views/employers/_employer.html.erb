@@ -27,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-        <% employer.job_applications.all.order(job_title: :asc).each do |job_application| %>
+        <% employer.job_applications.order(job_title: :asc).each do |job_application| %>
           <tr>
             <td><%= link_to "#{job_application.job_title}", job_application %></td>
             <td><%= job_application.status %> <%#TODO: Add small button to quickly change status%></td>
