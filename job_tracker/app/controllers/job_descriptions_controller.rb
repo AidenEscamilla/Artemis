@@ -1,5 +1,5 @@
 class JobDescriptionsController < ApplicationController
-  before_action :set_job_description, only: %i[ show edit update destroy ]
+  before_action :set_job_description, only: %i[ show edit update]
 
   # GET /job_descriptions or /job_descriptions.json
   def index
@@ -44,16 +44,6 @@ class JobDescriptionsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @job_description.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /job_descriptions/1 or /job_descriptions/1.json
-  def destroy
-    @job_description.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to job_descriptions_url, notice: "Job description was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
