@@ -1,5 +1,6 @@
 class EmployersController < ApplicationController
   before_action :set_employer, only: %i[ show edit update destroy ]
+  attr_accessor :current_form
 
   # GET /employers or /employers.json
   def index
@@ -24,7 +25,7 @@ class EmployersController < ApplicationController
   def create
     @employer = Employer.new(employer_params)
 
-    if @employer.save
+    if current_form.save!
       redirect_to employers_path, notice: "Employer was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -33,7 +34,7 @@ class EmployersController < ApplicationController
 
   # PATCH/PUT /employers/1 or /employers/1.json
   def update    
-    if @employer.update(employer_params)
+    if current_form.update!(employer_params)
       redirect_to employers_path, notice: "Employer was successfully created."
     else
       render :edit, status: :unprocessable_entity
@@ -58,5 +59,13 @@ class EmployersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def employer_params
       params.require(:employer).permit(:name, :phone_number, :email, :address => [:street, :city, :state, :zip])
+    end
+
+    def current_form
+      @current_form ||= Employers::EmployerForm.new(employer:)
+    end
+
+    def employer
+      @employer ||= Employer.new
     end
 end

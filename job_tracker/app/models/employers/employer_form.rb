@@ -1,24 +1,39 @@
 class Employers::EmployerForm
   include ActiveModel::Model
 
-  attr_accessor :name, :email, :phone_number, :address
+  attr_accessor :employer, :name, :email, :phone_number, :address
   validates :name, :email, :phone_number, :address, presence: true
   validates :name, format: { with: /\A[a-zA-Z\s]+\z/ }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validate  :phone_number_is_valid
   validate  :address_is_valid
 
-  def initialize(params: {})
-    @name = params[:name]
-    @email = params[:email]
-    @phone_number = params[:phone_number]
-    @address = params[:address]
+  def initialize(employer:)
+    @employer = employer
+    @name = employer.name
+    @email = employer.email
+    @phone_number = employer.phone_number
+    @address = employer.address.symbolize_keys
   end
 
-  def call
-    return unless valid?
+  def save!
+    if valid?
+      phone_number = @phone_number.gsub(/\D/, "")  # Remove all non-digits
+      Employer.create!(name:, email:, phone_number:, address:)
+    else
+      employer.errors.copy!(self.errors)
+      false
+    end
+  end
 
-    Employer.create!(name:, email:, phone_number:, address:)
+  def update!(employer_params)
+    self.attributes = employer_params #TODO: figure out how to set attributes
+    if valid?
+      employer.update!(name:, email:, phone_number:, address:)
+    else
+      employer.errors.copy!(self.errors)
+      false
+    end
   end
 
   private
@@ -46,7 +61,7 @@ class Employers::EmployerForm
       return
     end
 
-    unless address[:street].match?(/\A[a-zA-Z0-9\s]+\z/) && address[:street].present?
+    unless address[:street].match?(street_format)
       errors.add(:street, 'is invalid format')
     end
   end
@@ -57,7 +72,7 @@ class Employers::EmployerForm
       return
     end
 
-    unless address[:city].match?(/\A[a-zA-Z\s]+\z/)
+    unless address[:city].match?(city_state_format)
       errors.add(:city, 'is invalid format')
     end
   end
@@ -68,7 +83,7 @@ class Employers::EmployerForm
       return
     end
 
-    unless address[:state].match?(/\A[a-zA-Z\s]+\z/)
+    unless address[:state].match?(city_state_format)
       errors.add(:state, 'is invalid format')
     end
   end
@@ -79,8 +94,16 @@ class Employers::EmployerForm
       return
     end
 
-    unless address[:zip].match?(/\A\d{5}\z/)
+    unless address[:zip].match?(/\A\d{5}\z/) # US zip code (5 decimals)
       errors.add(:zip, 'is invalid format')
     end
+  end
+
+  def street_format
+    return /\A[a-zA-Z0-9\s]+\z/
+  end
+
+  def city_state_format
+    return /\A[a-zA-Z\s]+\z/
   end
 end
