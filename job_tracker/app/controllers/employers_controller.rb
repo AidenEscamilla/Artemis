@@ -35,7 +35,7 @@ class EmployersController < ApplicationController
   # PATCH/PUT /employers/1 or /employers/1.json
   def update    
     if current_form.update!(employer_params)
-      redirect_to employers_path, notice: "Employer was successfully created."
+      redirect_to employers_path, notice: "Employer was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
