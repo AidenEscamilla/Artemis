@@ -10,6 +10,8 @@ class JobDescription < ApplicationRecord
   validates :min_salary, :max_salary, format: { with: /\A\d+\z/ }
   validate :min_salary_less_than_max_salary
 
+  private
+  
   def min_salary_less_than_max_salary
     return unless min_salary.present? && max_salary.present?
 
