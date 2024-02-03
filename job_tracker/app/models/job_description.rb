@@ -7,7 +7,7 @@ class JobDescription < ApplicationRecord
   validates :job_classification, 
     format: { with: /\A[a-zA-Z\s]+\z/ },  unless: -> { job_classification.blank? }
 
-  validates :min_salary, :max_salary, format: { with: /\A\d+\z/ }
+  validates :min_salary, :max_salary, numericality: { greater_than: 0 }
   validate :min_salary_less_than_max_salary
 
   private
