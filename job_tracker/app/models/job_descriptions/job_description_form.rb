@@ -9,8 +9,6 @@ class JobDescriptions::JobDescriptionForm
   
   validates :job_classification, format: { with: /\A[a-zA-Z\s]+\z/ }
   validates :min_salary, :max_salary, format: { with: /\A\d+\z/ }
-  # validate  :phone_number_is_valid
-  # validate  :address_is_valid
 
   def initialize(job_description:)
     @job_description = job_description

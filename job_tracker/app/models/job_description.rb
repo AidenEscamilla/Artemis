@@ -2,7 +2,7 @@ class JobDescription < ApplicationRecord
   belongs_to :job_application
   
   validates   :description, :requirements, :job_classification,
-    :min_salary, :max_salary, :job_application_id, presence: true
+    :min_salary, :max_salary, presence: true
 
   validates :job_classification, 
     format: { with: /\A[a-zA-Z\s]+\z/ },  unless: -> { job_classification.blank? }
