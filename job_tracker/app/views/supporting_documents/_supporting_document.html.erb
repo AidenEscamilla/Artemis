@@ -1,0 +1,17 @@
+<div id="<%= dom_id supporting_document %>">
+  <p>
+    <strong>Name:</strong>
+    <%= supporting_document.name %>
+  </p>
+
+  <p>
+    <strong>Documents:</strong>
+    <%= link_to supporting_document.document.filename, supporting_document.document if supporting_document.document.attached? %>
+  </p>
+
+  <p>
+    <strong>Job application:</strong>
+    <%= link_to "#{supporting_document.job_application.job_title}", job_application_path(supporting_document.job_application) %>
+  </p>
+
+</div>
