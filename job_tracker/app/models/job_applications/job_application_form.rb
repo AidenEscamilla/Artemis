@@ -20,10 +20,11 @@ class JobApplications::JobApplicationForm
   end
 
   def save!
-    if valid?
+    if job_description_form.valid? && valid?
       job_application.save!
     else
-      job_application.errors.copy!(self.errors)
+      job_application.errors.merge!(errors)
+      job_application.errors.merge!(job_description_form.errors)
       false
     end
   end
@@ -32,25 +33,22 @@ class JobApplications::JobApplicationForm
     @employer_id = job_application_params[:employer_id]
     @job_title = job_application_params[:job_title]
     @status = job_application_params[:status]
-   
     @job_description.update(job_application_params[:job_description_attributes])
-    job_description_form = JobDescriptions::JobDescriptionForm.new(job_description: @job_description)
 
     if job_description_form.valid? && valid?
       job_application.update!(job_application_params)
     else
-      errors.each do |error|
-        job_application.errors.add(error.attribute, error.message)
-      end
-
-      job_description_form.errors.each do |error|
-        job_application.errors.add(error.attribute, error.message)
-      end
+      job_application.errors.merge!(errors)
+      job_application.errors.merge!(job_description_form.errors)
       false
     end
   end
 
   private
+
+  def job_description_form
+    @job_description_form ||= JobDescriptions::JobDescriptionForm.new(job_description: @job_description)
+  end
   
   def min_salary_less_than_max_salary
     return unless min_salary.present? && max_salary.present?
