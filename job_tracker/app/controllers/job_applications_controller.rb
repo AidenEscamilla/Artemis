@@ -24,7 +24,7 @@ class JobApplicationsController < ApplicationController
   def create
     @job_application = JobApplication.new(job_application_params)
 
-    if @job_application.save
+    if current_form.save!
       redirect_to job_applications_path, notice: "Job application was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -33,7 +33,7 @@ class JobApplicationsController < ApplicationController
 
   # PATCH/PUT /job_applications/1 or /job_applications/1.json
   def update
-    if @job_application.update(job_application_params)
+    if current_form.update!(job_application_params:)
       redirect_to job_applications_path, notice: "Job application was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -63,5 +63,13 @@ class JobApplicationsController < ApplicationController
         .permit(:id, :job_title, :employer_id, :status,
                 job_description_attributes: %i[description requirements min_salary max_salary job_classification]
         )
+    end
+
+    def job_application
+      @job_application ||= JobApplication.new
+    end
+
+    def current_form
+      @current_form ||= JobApplications::JobApplicationForm.new(job_application:)
     end
 end

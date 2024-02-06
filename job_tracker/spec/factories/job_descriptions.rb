@@ -5,6 +5,7 @@ FactoryBot.define do
     job_classification { "MyString" }
     min_salary { 1 }
     max_salary { 1 }
-    job_application { nil }
+
+    association :job_application
   end
 end

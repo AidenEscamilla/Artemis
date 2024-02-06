@@ -24,7 +24,7 @@ class JobDescriptionsController < ApplicationController
     @job_description = JobDescription.new(job_description_params)
 
     respond_to do |format|
-      if @job_description.save
+      if current_form.save!
         format.html { redirect_to job_description_url(@job_description), notice: "Job description was successfully created." }
         format.json { render :show, status: :created, location: @job_description }
       else
@@ -37,7 +37,7 @@ class JobDescriptionsController < ApplicationController
   # PATCH/PUT /job_descriptions/1 or /job_descriptions/1.json
   def update
     respond_to do |format|
-      if @job_description.update(job_description_params)
+      if current_form.update!(job_description_params)
         format.html { redirect_to job_description_url(@job_description), notice: "Job description was successfully updated." }
         format.json { render :show, status: :ok, location: @job_description }
       else
@@ -56,5 +56,13 @@ class JobDescriptionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def job_description_params
       params.require(:job_description).permit(:description, :requirements, :job_classification, :min_salary, :max_salary, :job_application_id)
+    end
+
+    def current_form
+      @current_form ||= JobDescriptions::JobDescriptionForm.new(job_description:)
+    end
+
+    def job_description
+      @job_description ||= JobDescription.new
     end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :job_application do
-    title { "MyString" }
-    status { "" }
-    employer { nil }
+    job_title { "MyString" }
+    status { "applied" }
+    employer
   end
 end
