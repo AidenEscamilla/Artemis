@@ -26,6 +26,7 @@ jobs:
       - name: Bundle install
         run: |
           gem install bundler
+          cd job_tracker
           bundle exec rake
 
       - name: Setup Database
