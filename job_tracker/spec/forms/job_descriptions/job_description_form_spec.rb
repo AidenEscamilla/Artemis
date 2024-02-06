@@ -96,7 +96,7 @@ module JobDescriptions
         end
       end
 
-      context 'when job_classification is not a string' do
+      context 'when job_classification is contains numbers' do
         it 'is invalid' do
           job_description_form.job_classification = "123"
           expect(job_description_form).to be_invalid
