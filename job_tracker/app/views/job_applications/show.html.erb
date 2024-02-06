@@ -24,6 +24,13 @@
     <li> <%= link_to "Job Description", job_description_path(@job_application.job_description) %> </li>
     <li> <%= "Interviews" %> </li>
     <li> <%= "Supporting Documents" %> </li>
+    <div>
+      <ul>
+      <% @job_application.supporting_documents.each do |document| %>
+        <li> <%= link_to "#{document.name}", supporting_document_path(document) %> </li>
+      <% end %>
+      </ul>
+    </div>
     <li> <%= "Offer?" %> </li>
 </ul>
 
