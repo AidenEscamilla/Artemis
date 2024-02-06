@@ -47,11 +47,11 @@ module JobDescriptions
 
         it 'updates the job_description attributes' do
           job_description_form.update!(job_description_params)
-          expect(job_description_form.description).to eq('Updated Job Description')
-          expect(job_description_form.requirements).to eq('Updated Job Requirements')
-          expect(job_description_form.job_classification).to eq('Updated Software Engineer')
-          expect(job_description_form.min_salary).to eq(300)
-          expect(job_description_form.max_salary).to eq(400)
+          expect(job_description.description).to eq('Updated Job Description')
+          expect(job_description.requirements).to eq('Updated Job Requirements')
+          expect(job_description.job_classification).to eq('Updated Software Engineer')
+          expect(job_description.min_salary).to eq(300)
+          expect(job_description.max_salary).to eq(400)
         end
       end
 
