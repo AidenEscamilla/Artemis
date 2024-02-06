@@ -26,10 +26,12 @@ jobs:
       - name: Bundle install
         run: |
           gem install bundler
+          cd job_tracker
           bundle install --jobs 4 --retry 3
 
       - name: Setup Database
         run: |
+          cd job_tracker
           cp config/database.yml.github-actions config/database.yml
           bundle exec rake db:create
           bundle exec rake db:schema:load
@@ -39,7 +41,9 @@ jobs:
           POSTGRES_PASSWORD: postgres
 
       - name: Run RSpec
-        run: COVERAGE=true bundle exec rspec  --require rails_helper
+        run: |
+          cd job_tracker
+          COVERAGE=true bundle exec rspec  --require rails_helper
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres
