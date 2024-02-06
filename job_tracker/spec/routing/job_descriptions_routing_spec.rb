@@ -31,8 +31,8 @@ RSpec.describe JobDescriptionsController, type: :routing do
       expect(patch: "/job_descriptions/1").to route_to("job_descriptions#update", id: "1")
     end
 
-    it "routes to #destroy" do
-      expect(delete: "/job_descriptions/1").to route_to("job_descriptions#destroy", id: "1")
+    it "does not routes to #destroy" do
+      expect(delete: "/job_descriptions/1").to_not route_to("job_descriptions#destroy", id: "1")
     end
   end
 end
