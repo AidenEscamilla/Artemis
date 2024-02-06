@@ -4,26 +4,26 @@ RSpec.describe "employers/index", type: :view do
   before(:each) do
     assign(:employers, [
       Employer.create!(
-        name: "Name",
-        phone_number: "Phone Number",
+        name: "Example",
         email: "Email",
-        address: ""
+        phone_number: "1234567890",
+        address: { "street" => "MyStreet1234", "city" => "MyCity", "state" => "MyState", "zip" => 00005}
       ),
       Employer.create!(
-        name: "Name",
-        phone_number: "Phone Number",
+        name: "Example",
         email: "Email",
-        address: ""
+        phone_number: "1234567890",
+        address: { "street" => "MyStreet1234", "city" => "MyCity", "state" => "MyState", "zip" => 00005}
       )
     ])
   end
 
   it "renders a list of employers" do
     render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Phone Number".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Email".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("".to_s), count: 2
+
+    assert_select "h2", text: "Name: Example", count: 2
+    assert_select "div>b", text: "Email:", count: 2
+    assert_select "div>b", text: "Phone Number:", count: 2
+    assert_select "div>b", text: "Address:", count: 2
   end
 end

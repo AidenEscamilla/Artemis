@@ -1,8 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "job_applications/edit", type: :view do
+  let(:employer) {
+    Employer.create!(
+      name: "MyName",
+      phone_number: "1234567890",
+      email: "",
+      address: { "street" => "MyStreet", "city" => "MyCity", "state" => "MyState", "zip" => 12345 }
+    )
+  }
   let(:job_application) {
-    JobApplication.create!()
+    JobApplication.create!(employer: employer)
   }
 
   before(:each) do
