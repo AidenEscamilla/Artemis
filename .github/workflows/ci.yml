@@ -43,6 +43,7 @@ jobs:
       - name: Run RSpec
         run: |
           cd job_tracker
+          rails assets:precompile
           COVERAGE=true bundle exec rspec  --require rails_helper
         env:
           RAILS_ENV: test
