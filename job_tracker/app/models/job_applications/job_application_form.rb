@@ -36,7 +36,7 @@ class JobApplications::JobApplicationForm
     @job_description.update(job_application_params[:job_description_attributes])
 
     if job_description_form.valid? && valid?
-      job_application.update!(job_application_params)
+      job_application.update!(job_application_params) # be aware of SQL injection here
     else
       job_application.errors.merge!(errors)
       job_application.errors.merge!(job_description_form.errors)
