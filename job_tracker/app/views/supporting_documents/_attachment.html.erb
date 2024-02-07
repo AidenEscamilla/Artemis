@@ -1,7 +1,7 @@
 <% if document.attached? %>
   <ul>
     <li>
-      <%= link_to "#{document.filename}", document%>
+      Download: <%= link_to "#{document.filename}", rails_blob_path(document, disposition: 'attachment')%>
     </li>
   </ul>
   <div class="row">
