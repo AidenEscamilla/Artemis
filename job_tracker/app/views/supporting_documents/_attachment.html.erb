@@ -1,0 +1,14 @@
+<% if supporting_document.document.attached? %>
+  <ul>
+    <li>
+      <%= link_to "#{supporting_document.document.filename}", supporting_document.document%>
+    </li>
+  </ul>
+  <div class="row">
+    <% if supporting_document.document.image?%>
+      <div class="message-image-container">
+        <%= image_tag(supporting_document.document, class:"message-image") %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
