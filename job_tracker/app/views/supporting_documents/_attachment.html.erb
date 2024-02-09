@@ -1,0 +1,14 @@
+<% if document.attached? %>
+  <ul>
+    <li>
+      Download: <%= link_to "#{document.filename}", rails_blob_path(document, disposition: 'attachment')%>
+    </li>
+  </ul>
+  <div class="row">
+    <% if document.image?%>
+      <div class="message-image-container">
+        <%= image_tag document.variant(resize_to_limit: [400, 500]), class:"message-image" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

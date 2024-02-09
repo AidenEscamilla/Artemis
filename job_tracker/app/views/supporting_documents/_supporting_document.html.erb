@@ -1,0 +1,19 @@
+<div id="<%= dom_id supporting_document %>">
+  <h2>
+    <strong>Name:</strong>
+    <%= supporting_document.name %>
+  </h2>
+
+  <p>
+    <strong>Job application:</strong>
+    <%= link_to "#{supporting_document.job_application.job_title}", job_application_path(supporting_document.job_application) %>
+  </p>
+
+
+  <p>
+    <strong>Documents:</strong>
+  </p>
+
+  <%= render "supporting_documents/attachment", document: supporting_document.document%>
+
+</div>

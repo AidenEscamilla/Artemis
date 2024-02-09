@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%= link_to "Supporting documents", home_index_path %></h1>
+
+<div id="supporting_documents">
+  <% @supporting_documents.each do |supporting_document| %>
+    <%= render supporting_document %>
+    <p>
+      <%= link_to "Show this supporting document", supporting_document %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New supporting document", new_supporting_document_path %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @supporting_document %>
+
+<div>
+  <%= link_to "Edit this supporting document", edit_supporting_document_path(@supporting_document) %> |
+  <%= link_to "Back to supporting documents", supporting_documents_path %>
+
+  <%= button_to "Destroy this supporting document", @supporting_document, method: :delete %>
+</div>
