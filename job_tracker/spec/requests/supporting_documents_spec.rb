@@ -24,7 +24,7 @@ RSpec.describe "/supporting_documents", type: :request do
     {
       name: "Resume",
       document: Rack::Test::UploadedFile.new("spec/fixtures/files/resume.pdf", "application/pdf"),
-      job_application_id: job_application.id
+      job_application_ids: [job_application.id]
     }
   }
 
@@ -32,7 +32,7 @@ RSpec.describe "/supporting_documents", type: :request do
     {
       name: nil,
       document: nil,
-      job_application_id: nil
+      job_application_ids: []
     }
   }
 
@@ -103,7 +103,7 @@ RSpec.describe "/supporting_documents", type: :request do
         {
           name: "Cover Letter",
           document: Rack::Test::UploadedFile.new("spec/fixtures/files/cover_letter.pdf", "application/pdf"),
-          job_application_id: job_application.id
+          job_application_ids: [job_application.id]
         }
       }
 

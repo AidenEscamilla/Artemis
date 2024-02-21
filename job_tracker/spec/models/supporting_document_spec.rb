@@ -5,17 +5,17 @@ RSpec.describe SupportingDocument, type: :model do
   let(:job_application) { create(:job_application, employer: employer) }
   let(:supporting_document) { 
     create(:supporting_document, 
-      job_application: job_application,
       name: "Resume",
       document: Rack::Test::UploadedFile.new("spec/fixtures/files/resume.pdf", "application/pdf")
     )
   }
+  let!(:document_linker) {create(:document_linker, job_application:, supporting_document:)}
 
 
   describe 'associations' do
-    context 'belongs_to' do
-      it "belongs to job_application" do
-        expect(supporting_document.job_application).to eq(job_application)
+    context 'has_many' do
+      it "has a document_linker" do
+        expect(supporting_document.document_linkers.first).to_not be_nil
       end
     end
 

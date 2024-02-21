@@ -1,5 +1,5 @@
 class SupportingDocument < ApplicationRecord
-  has_many :document_linkers
+  has_many :document_linkers, dependent: :destroy
   has_many :job_applications, :through => :document_linkers
 
   has_one_attached :document, dependent: :destroy
