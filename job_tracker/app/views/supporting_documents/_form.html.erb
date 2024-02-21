@@ -21,12 +21,13 @@
     <%= form.file_field :document %>
   </div>
 
-  <div>
-    <%= form.label :job_application_id, style: "display: block" %>
-    <%= form.select :job_application_id,
-      JobApplication.all.map { |job_app| [ "#{job_app.employer.name}: #{job_app.job_title}", job_app.id ] },
-      include_blank: true
-    %>
+  <div class="form-group">
+    <%= form.label :job_application_ids, style: "display: block" %>
+    <%= form.collection_check_boxes(:job_application_ids, JobApplication.all, :id, :full_title) do |box| %>
+      <li class="list-unstyled">
+        <%= box.label(:job_application_ids => box.value) { box.check_box + box.text}%>
+      </li>
+    <% end %>
   </div>
 
   <div>

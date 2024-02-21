@@ -4,15 +4,12 @@ RSpec.describe "supporting_documents/edit", type: :view do
   let(:employer) { Employer.create!(name: "Employer") }
   let(:job_application) {create(:job_application, employer: employer)}
 
-  let(:supporting_document) {
-    SupportingDocument.create!(
+  let(:supporting_document) {SupportingDocument.create!(
       name: "Resume",
-      document: Rack::Test::UploadedFile.new("spec/fixtures/files/resume.pdf", "application/pdf"),
-      job_application: job_application
-    )
-  }
+      document: Rack::Test::UploadedFile.new("spec/fixtures/files/resume.pdf", "application/pdf")
+    )}
 
-  before(:each) do
+  before do
     assign(:supporting_document, supporting_document)
   end
 
@@ -25,7 +22,7 @@ RSpec.describe "supporting_documents/edit", type: :view do
 
       assert_select "input[name=?]", "supporting_document[document]"
 
-      assert_select "select[name=?]", "supporting_document[job_application_id]"
+      assert_select "input[name=?]", "supporting_document[job_application_ids][]"
     end
   end
 end

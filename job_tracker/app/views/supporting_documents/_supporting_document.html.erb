@@ -5,9 +5,13 @@
   </h2>
 
   <p>
-    <strong>Job application:</strong>
-    <%= link_to "#{supporting_document.job_application.job_title}", job_application_path(supporting_document.job_application) %>
-  </p>
+    <strong>Job applications:</strong>
+    <% supporting_document.job_applications.each do |application|%>
+      <li class="list-unstyled">
+        <%= link_to "#{application.job_title}", job_application_path(application) %>
+      </li>
+    <% end %>
+  </p> 
 
 
   <p>

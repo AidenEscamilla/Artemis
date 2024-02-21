@@ -21,10 +21,22 @@ class SupportingDocumentsController < ApplicationController
 
   # POST /supporting_documents or /supporting_documents.json
   def create
-    @supporting_document = SupportingDocument.new(supporting_document_params)
+    @supporting_document = SupportingDocument.new(
+      name: supporting_document_params[:name],
+      document: supporting_document_params[:document])
+    
 
     respond_to do |format|
       if @supporting_document.save
+
+        valid_ids = supporting_document_params[:job_application_ids].select { |app_id| app_id.blank? == false}
+        valid_ids.each { |id|
+          linker = DocumentLinker.new(
+            job_application_id: id,
+            supporting_document_id: @supporting_document.id)
+          linker.save!
+        }
+
         format.html { redirect_to supporting_document_url(@supporting_document), notice: "Supporting document was successfully created." }
         format.json { render :show, status: :created, location: @supporting_document }
       else
@@ -37,7 +49,17 @@ class SupportingDocumentsController < ApplicationController
   # PATCH/PUT /supporting_documents/1 or /supporting_documents/1.json
   def update
     respond_to do |format|
-      if @supporting_document.update(supporting_document_params)
+      if @supporting_document.update(
+        name: supporting_document_params[:name],
+        document: supporting_document_params[:document])
+
+        valid_ids = supporting_document_params[:job_application_ids].select { |app_id| app_id.blank? == false}
+        valid_ids.each { |id|
+          linker = DocumentLinker.create!(
+            job_application_id: id,
+            supporting_document_id: @supporting_document.id)
+        }
+
         format.html { redirect_to supporting_document_url(@supporting_document), notice: "Supporting document was successfully updated." }
         format.json { render :show, status: :ok, location: @supporting_document }
       else
@@ -65,6 +87,7 @@ class SupportingDocumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def supporting_document_params
-      params.require(:supporting_document).permit(:name, :document, :job_application_id)
+
+      params.require(:supporting_document).permit(:name, :document, :job_application_ids => [])
     end
 end
