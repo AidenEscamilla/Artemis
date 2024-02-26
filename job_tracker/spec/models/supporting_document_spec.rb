@@ -3,17 +3,22 @@ require 'rails_helper'
 RSpec.describe SupportingDocument, type: :model do
   let(:employer) { create(:employer) }
   let(:job_application) { create(:job_application, employer: employer) }
-  let(:supporting_document) { 
+  let!(:supporting_document) { 
     create(:supporting_document, 
       name: "Resume",
-      document: Rack::Test::UploadedFile.new("spec/fixtures/files/resume.pdf", "application/pdf")
+      document: ActiveStorage::Blob.create_and_upload!(
+        io: File.open(Rails.root.join(file_fixture("resume.pdf")), 'rb'),
+        filename: "resume.pdf",
+        content_type: 'application/pdf'
+      )
     )
   }
-  let!(:document_linker) {create(:document_linker, job_application:, supporting_document:)}
 
 
   describe 'associations' do
-    context 'has_many' do
+    context 'has_many_attached' do
+      let!(:document_linker) {create(:document_linker, job_application:, supporting_document:)}
+
       it "has a document_linker" do
         expect(supporting_document.document_linkers.first).to_not be_nil
       end
